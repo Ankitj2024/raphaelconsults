@@ -6,7 +6,7 @@ import {
   PlaneIcon,
   StarIcon
 } from './components/Icons';
-import { AIConsultant } from './components/AIConsultant';
+
 import { Service, Destination, Testimonial } from './types';
 
 // Updated Data with Raphael Travel & Educational Consults content
@@ -361,37 +361,7 @@ function App() {
         </div>
       </section>
 
-      {/* 5. AI Consultant Section */}
-      <section id="advisor" className="py-24 bg-brand-900 text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-brand-800/50 skew-x-12 transform origin-top-right"></div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <div className="inline-flex items-center px-4 py-2 rounded-full bg-accent-500/20 text-accent-400 font-bold text-sm mb-6 border border-accent-500/30">
-                <StarIcon className="w-4 h-4 mr-2" /> Digital & AI Driven
-              </div>
-              <h2 className="text-4xl font-bold mb-6">Smart Guidance for Global Success</h2>
-              <p className="text-brand-100 text-lg mb-8 leading-relaxed">
-                Raphael Consults combines expert human counseling with modern technology to provide accurate, balanced, and strictly transparent information for your study abroad plans.
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                {['Course Selection', 'Cost Calculation', 'Visa Requirements', 'University Match'].map((item) => (
-                  <div key={item} className="flex items-center gap-3 bg-brand-800/50 p-3 rounded-lg border border-brand-700">
-                    <div className="w-2 h-2 bg-accent-500 rounded-full"></div>
-                    <span className="font-medium">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="bg-white text-gray-900 rounded-2xl shadow-2xl overflow-hidden border border-brand-700/50">
-              <AIConsultant />
-            </div>
-          </div>
-        </div>
-      </section>
 
 
 
