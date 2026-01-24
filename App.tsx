@@ -2,6 +2,7 @@ import React from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { CompanyStats } from './components/CompanyStats';
+import { About } from './components/About';
 import { DestinationsGrid } from './components/DestinationsGrid';
 import { UniversityPartners } from './components/UniversityPartners';
 import { Services } from './components/Services';
@@ -17,6 +18,7 @@ function App() {
       <DestinationsGrid />
       <UniversityPartners />
       <Services />
+      <About />
       <LeadGenCTA />
       <Footer />
     </div>
