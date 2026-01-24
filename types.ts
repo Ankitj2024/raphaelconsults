@@ -7,6 +7,13 @@ export interface Service {
   icon: React.ReactNode;
 }
 
+export interface University {
+  name: string;
+  location: string;
+  courseCount: string;
+  logoUrl?: string;
+}
+
 export interface Destination {
   id: number;
   country: string;
@@ -14,6 +21,7 @@ export interface Destination {
   image: string;
   description: string;
   universityList?: string[];
+  universityDetails?: University[];
 }
 
 export interface ChatMessage {
