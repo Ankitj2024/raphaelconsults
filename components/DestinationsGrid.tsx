@@ -12,24 +12,28 @@ export function DestinationsGrid() {
                 </div>
 
                 <div className="relative flex overflow-hidden group">
-                    <div className="flex animate-scroll whitespace-nowrap gap-8 py-4 hover:[animation-play-state:paused]">
-                        {[...destinations, ...destinations, ...destinations].map((dest, i) => (
-                            <div
-                                key={`${dest.id}-${i}`}
-                                onClick={() => {
-                                    document.getElementById('universities')?.scrollIntoView({ behavior: 'smooth' });
-                                }}
-                                className="group/card cursor-pointer min-w-[180px] hover:scale-105 transition-transform duration-300"
-                            >
-                                <div className="relative overflow-hidden rounded-lg aspect-video mb-3 border border-gray-100 shadow-sm group-hover/card:shadow-md">
-                                    <img
-                                        src={dest.image}
-                                        alt={dest.country}
-                                        className="w-full h-full object-cover"
-                                    />
-                                    <div className="absolute inset-0 bg-brand-900/0 group-hover/card:bg-brand-900/10 transition-colors duration-300"></div>
-                                </div>
-                                <h3 className="text-center font-bold text-gray-900 group-hover/card:text-brand-600 transition-colors text-sm">{dest.country}</h3>
+                    <div className="flex animate-scroll whitespace-nowrap w-max hover:[animation-play-state:paused]">
+                        {[1, 2].map((groupIndex) => (
+                            <div key={`group-${groupIndex}`} className="flex gap-8 pr-8 py-4">
+                                {destinations.map((dest, i) => (
+                                    <div
+                                        key={`g${groupIndex}-${dest.id}-${i}`}
+                                        onClick={() => {
+                                            document.getElementById('universities')?.scrollIntoView({ behavior: 'smooth' });
+                                        }}
+                                        className="group/card cursor-pointer min-w-[180px] hover:scale-105 transition-transform duration-300"
+                                    >
+                                        <div className="relative overflow-hidden rounded-lg aspect-video mb-3 border border-gray-100 shadow-sm group-hover/card:shadow-md">
+                                            <img
+                                                src={dest.image}
+                                                alt={dest.country}
+                                                className="w-full h-full object-cover"
+                                            />
+                                            <div className="absolute inset-0 bg-brand-900/0 group-hover/card:bg-brand-900/10 transition-colors duration-300"></div>
+                                        </div>
+                                        <h3 className="text-center font-bold text-gray-900 group-hover/card:text-brand-600 transition-colors text-sm">{dest.country}</h3>
+                                    </div>
+                                ))}
                             </div>
                         ))}
                     </div>

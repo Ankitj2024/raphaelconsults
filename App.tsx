@@ -9,6 +9,8 @@ import { Services } from './components/Services';
 import { LeadGenCTA } from './components/LeadGenCTA';
 import { Footer } from './components/Footer';
 
+import { Gallery } from './components/Gallery';
+
 function App() {
   return (
     <div className="min-h-screen bg-white text-gray-800 font-sans">
@@ -18,6 +20,7 @@ function App() {
       <DestinationsGrid />
       <UniversityPartners />
       <Services />
+      <Gallery />
       <About />
       <LeadGenCTA />
       <Footer />

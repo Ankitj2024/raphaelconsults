@@ -35,8 +35,8 @@ export function Hero() {
                         <div className="relative w-full max-w-lg aspect-square">
                             <div className="absolute inset-0 bg-white/10 rounded-full blur-3xl transform scale-110"></div>
                             <img
-                                src="/hero_students.png"
-                                alt="International Students"
+                                src="/images/hero-airport.jpg"
+                                alt="Students Arriving"
                                 className="relative z-10 w-full h-full object-cover rounded-[3rem] shadow-2xl border-8 border-white/20"
                             />
                             <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-xl z-20 flex items-center gap-3 animate-bounce-slow">
