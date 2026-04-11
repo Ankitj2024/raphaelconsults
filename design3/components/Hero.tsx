@@ -35,18 +35,9 @@ export function Hero() {
         >
             <motion.div
                 style={{ y: scrollY, opacity, scale, x: textX, translateY: textY }}
-                className="relative z-10 text-center px-4 max-w-6xl mx-auto"
+                className="relative z-10 text-center px-4 pt-40 max-w-6xl mx-auto"
             >
-                {/* Badge */}
-                <motion.div
-                    initial={{ y: 30, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                    className="inline-flex items-center gap-2 px-5 py-2 rounded-full glass mb-8"
-                >
-                    <span className="w-2 h-2 rounded-full bg-accent" />
-                    <span className="text-[10px] font-bold tracking-[0.3em] text-white/70 uppercase">Premium Consultancy</span>
-                </motion.div>
+
 
                 {/* Main Title */}
                 <motion.h1
@@ -105,16 +96,7 @@ export function Hero() {
                 />
             </div>
 
-            {/* Scroll Indicator */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.5, duration: 1 }}
-                className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
-            >
-                <span className="text-[10px] uppercase tracking-[0.3em] text-white/40">Scroll to Explore</span>
-                <div className="w-px h-12 bg-gradient-to-b from-accent to-transparent" />
-            </motion.div>
+
         </section>
     );
 }

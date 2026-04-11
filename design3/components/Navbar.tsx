@@ -5,7 +5,7 @@ export function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
-        <nav className="fixed top-0 left-0 w-full p-6 md:p-8 flex justify-between items-center z-[5000] mix-blend-difference">
+        <nav className="fixed top-0 left-0 w-full p-6 md:p-8 flex justify-between items-center z-[5000] bg-bg/60 backdrop-blur-xl border-b border-white/5">
             {/* Logo */}
             <div className="font-display text-2xl font-bold uppercase tracking-tighter">
                 Raphael<span className="text-accent">.</span>
