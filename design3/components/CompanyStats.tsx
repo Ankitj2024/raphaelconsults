@@ -14,13 +14,13 @@ export function CompanyStats() {
                 >
                     <div>
                         <span className="text-accent text-[10px] font-bold uppercase tracking-[0.3em] mb-4 block">Why Choose Us</span>
-                        <h2 className="font-display text-5xl md:text-7xl font-bold uppercase leading-[0.9]">
+                        <h2 className="font-display text-5xl md:text-7xl font-bold uppercase leading-[0.9]" style={{ color: 'var(--rc-fg-hex)' }}>
                             The Trusted<br />Pathway to<br />
                             <span className="text-stroke italic font-serif">Global</span>{' '}
                             <span className="text-accent">Education</span>
                         </h2>
                     </div>
-                    <p className="text-white/40 max-w-sm text-sm uppercase tracking-widest leading-loose">
+                    <p className="max-w-sm text-sm uppercase tracking-widest leading-loose" style={{ color: 'var(--rc-muted)' }}>
                         We are a digitally driven consultancy with a presence in Zimbabwe, Ghana, and India.
                         Our mission is to empower ambitious students to achieve their educational objectives efficiently.
                     </p>
@@ -45,10 +45,10 @@ export function CompanyStats() {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                             viewport={{ once: true }}
-                            className="glass rounded-2xl p-8 group hover:bg-white/10 transition-colors duration-500"
+                            className="glass rounded-2xl p-8 group transition-colors duration-500"
                         >
                             <div className="font-display text-4xl md:text-5xl font-bold text-accent mb-3">{stat.val}</div>
-                            <div className="text-[10px] text-white/40 font-bold uppercase tracking-[0.2em]">{stat.label}</div>
+                            <div className="text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: 'var(--rc-muted)' }}>{stat.label}</div>
                         </motion.div>
                     ))}
                 </motion.div>

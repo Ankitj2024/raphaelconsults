@@ -1,4 +1,5 @@
 import React from 'react';
+import { ThemeProvider } from './context/ThemeContext';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { CompanyStats } from './components/CompanyStats';
@@ -12,7 +13,7 @@ import { Gallery } from './components/Gallery';
 import CustomCursor from './components/CustomCursor';
 import { motion, useScroll, useSpring } from 'motion/react';
 
-function App() {
+function AppContent() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -21,7 +22,7 @@ function App() {
   });
 
   return (
-    <main className="relative min-h-screen bg-bg selection:bg-accent selection:text-white">
+    <main className="relative min-h-screen bg-bg selection:bg-accent selection:text-white" style={{ color: 'var(--rc-fg-hex)', transition: 'background-color 0.4s ease' }}>
       {/* Global Elements */}
       <CustomCursor />
       <div className="noise" />
@@ -54,6 +55,14 @@ function App() {
         className="fixed inset-0 bg-bg z-[99999] pointer-events-none"
       />
     </main>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 }
 

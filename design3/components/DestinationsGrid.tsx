@@ -14,10 +14,10 @@ export function DestinationsGrid() {
                     className="mb-20"
                 >
                     <span className="text-accent text-[10px] font-bold uppercase tracking-[0.3em] mb-4 block">Global Reach</span>
-                    <h2 className="font-display text-5xl md:text-8xl font-bold uppercase leading-[0.9]">
+                    <h2 className="font-display text-5xl md:text-8xl font-bold uppercase leading-[0.9]" style={{ color: 'var(--rc-fg-hex)' }}>
                         Destinations<br />We <span className="text-stroke italic font-serif">Cover</span>
                     </h2>
-                    <p className="mt-8 text-white/40 max-w-lg text-sm uppercase tracking-widest leading-loose">
+                    <p className="mt-8 max-w-lg text-sm uppercase tracking-widest leading-loose" style={{ color: 'var(--rc-muted)' }}>
                         We counsel students and facilitate strategic placements across the most sought-after global universities.
                     </p>
                 </motion.div>
@@ -44,10 +44,10 @@ export function DestinationsGrid() {
                             />
                             <div className="absolute inset-0 p-6 flex flex-col justify-end bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                                 <span className="text-accent text-xs font-bold uppercase tracking-widest mb-1">Explore</span>
-                                <h3 className="font-display text-2xl md:text-3xl font-bold uppercase">{dest.country}</h3>
+                                <h3 className="font-display text-2xl md:text-3xl font-bold uppercase text-white">{dest.country}</h3>
                             </div>
                             <div className="absolute bottom-4 left-4 opacity-100 group-hover:opacity-0 transition-opacity duration-300">
-                                <h3 className="font-display text-sm font-bold uppercase tracking-wider">{dest.country}</h3>
+                                <h3 className="font-display text-sm font-bold uppercase tracking-wider" style={{ color: 'var(--rc-fg-hex)' }}>{dest.country}</h3>
                             </div>
                         </motion.div>
                     ))}

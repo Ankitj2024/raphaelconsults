@@ -1,25 +1,68 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;500;700&family=Playfair+Display:ital,wght@0,900;1,900&display=swap');
 @import "tailwindcss";
 
-@theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Space Grotesk", sans-serif;
-  --font-serif: "Playfair Display", serif;
-
-  --color-accent: #ff4e00;
-  --color-accent-light: #ff6a2a;
-  --color-accent-dark: #cc3e00;
-  --color-bg: #050505;
-  --color-bg-card: #0a0a0a;
-  --color-bg-elevated: #111111;
+/* ─── Design tokens (dark by default) ─── */
+:root {
+  --rc-bg:          #050505;
+  --rc-bg-card:     #0a0a0a;
+  --rc-bg-elevated: #111111;
+  --rc-fg:          255 255 255;          /* R G B for opacity tricks   */
+  --rc-fg-hex:      #ffffff;
+  --rc-border:      rgba(255,255,255,0.10);
+  --rc-glass-bg:    rgba(255,255,255,0.05);
+  --rc-glass-bd:    rgba(255,255,255,0.10);
+  --rc-muted:       rgba(255,255,255,0.40);
+  --rc-subtle:      rgba(255,255,255,0.20);
+  --rc-stroke:      rgba(255,255,255,0.30);
+  --rc-accent:      #ff4e00;
+  --rc-accent-l:    #ff6a2a;
+  --rc-accent-d:    #cc3e00;
 }
 
+/* ─── Light theme overrides ─── */
+[data-theme="light"] {
+  --rc-bg:          #f4f1eb;
+  --rc-bg-card:     #ece8e0;
+  --rc-bg-elevated: #e4e0d8;
+  --rc-fg:          10 10 10;
+  --rc-fg-hex:      #0a0a0a;
+  --rc-border:      rgba(0,0,0,0.10);
+  --rc-glass-bg:    rgba(0,0,0,0.04);
+  --rc-glass-bd:    rgba(0,0,0,0.10);
+  --rc-muted:       rgba(0,0,0,0.45);
+  --rc-subtle:      rgba(0,0,0,0.20);
+  --rc-stroke:      rgba(0,0,0,0.25);
+}
+
+/* ─── Tailwind theme ─── */
+@theme {
+  --font-sans:    "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-serif:   "Playfair Display", serif;
+
+  --color-accent:       var(--rc-accent);
+  --color-accent-light: var(--rc-accent-l);
+  --color-accent-dark:  var(--rc-accent-d);
+  --color-bg:           var(--rc-bg);
+  --color-bg-card:      var(--rc-bg-card);
+  --color-bg-elevated:  var(--rc-bg-elevated);
+  --color-fg:           rgb(var(--rc-fg));
+}
+
+/* ─── Base ─── */
 @layer base {
+  html {
+    background-color: var(--rc-bg);
+  }
+
   body {
-    @apply bg-bg text-white overflow-x-hidden;
+    background-color: var(--rc-bg);
+    color: var(--rc-fg-hex);
+    overflow-x: hidden;
     cursor: none;
     scroll-behavior: smooth;
     font-family: "Inter", system-ui, sans-serif;
+    transition: background-color 0.4s ease, color 0.4s ease;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -27,30 +70,51 @@
   }
 
   ::selection {
-    @apply bg-accent text-white;
+    background-color: var(--rc-accent);
+    color: #ffffff;
   }
 }
 
+/* ─── Utilities ─── */
 @layer utilities {
+  /* fg colour helpers that respect theme */
+  .text-fg          { color: var(--rc-fg-hex); }
+  .text-fg-muted    { color: var(--rc-muted); }
+  .text-fg-subtle   { color: var(--rc-subtle); }
+
+  /* Outlined text – adapts to theme */
   .text-stroke {
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+    -webkit-text-stroke: 1px var(--rc-stroke);
     color: transparent;
   }
 
+  /* Glass cards */
   .glass {
-    @apply backdrop-blur-xl bg-white/5 border border-white/10;
+    background: var(--rc-glass-bg);
+    border: 1px solid var(--rc-glass-bd);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: background 0.4s ease, border-color 0.4s ease;
   }
 
   .glass-strong {
-    @apply backdrop-blur-2xl bg-white/10 border border-white/15;
+    background: color-mix(in srgb, var(--rc-glass-bg) 200%, transparent);
+    border: 1px solid var(--rc-glass-bd);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    transition: background 0.4s ease, border-color 0.4s ease;
   }
 
+  /* Divider */
+  .rc-divider {
+    background-color: var(--rc-border);
+  }
+
+  /* Noise overlay */
   .noise {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     pointer-events: none;
     opacity: 0.04;
     z-index: 9999;

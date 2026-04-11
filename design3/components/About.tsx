@@ -13,11 +13,11 @@ export function About() {
                     className="text-center mb-20"
                 >
                     <span className="text-accent text-[10px] font-bold uppercase tracking-[0.3em] mb-4 block">Corporate Identity</span>
-                    <h2 className="font-display text-5xl md:text-8xl font-bold uppercase leading-[0.9] mb-8">
+                    <h2 className="font-display text-5xl md:text-8xl font-bold uppercase leading-[0.9] mb-8" style={{ color: 'var(--rc-fg-hex)' }}>
                         About <span className="text-stroke italic font-serif">Us</span>
                     </h2>
-                    <p className="text-white/50 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-                        Raphael Travel & Educational Consults is a premier international education consultancy operating globally across
+                    <p className="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: 'var(--rc-muted)' }}>
+                        Raphael Travel &amp; Educational Consults is a premier international education consultancy operating globally across
                         <span className="text-accent font-semibold"> Zimbabwe, Ghana, and India</span>.
                         We operate as your elite gateway to unparalleled global education, unlocking high-tier universities through unbiased and precise professional guidance.
                     </p>
@@ -28,7 +28,8 @@ export function About() {
                     whileInView={{ width: "100%" }}
                     transition={{ duration: 1, ease: "circOut" }}
                     viewport={{ once: true }}
-                    className="h-px bg-white/10 mb-20"
+                    className="h-px mb-20"
+                    style={{ backgroundColor: 'var(--rc-border)' }}
                 />
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -61,13 +62,14 @@ export function About() {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
                             viewport={{ once: true }}
-                            className="group glass rounded-2xl p-8 hover:bg-white/10 transition-all duration-500 hover:-translate-y-2"
+                            className="group glass rounded-2xl p-8 transition-all duration-500 hover:-translate-y-2"
+                            style={{ ['--hover-bg' as string]: 'var(--rc-glass-bg)' }}
                         >
                             <div className="w-14 h-14 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center mb-6 group-hover:bg-accent/20 group-hover:scale-110 transition-all duration-500">
                                 {item.icon}
                             </div>
-                            <h3 className="font-display text-xl font-bold uppercase mb-4 group-hover:text-accent transition-colors duration-300">{item.title}</h3>
-                            <p className="text-white/40 text-sm leading-relaxed">{item.desc}</p>
+                            <h3 className="font-display text-xl font-bold uppercase mb-4 group-hover:text-accent transition-colors duration-300" style={{ color: 'var(--rc-fg-hex)' }}>{item.title}</h3>
+                            <p className="text-sm leading-relaxed" style={{ color: 'var(--rc-muted)' }}>{item.desc}</p>
                         </motion.div>
                     ))}
                 </div>
