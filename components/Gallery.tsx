@@ -47,7 +47,7 @@ export function Gallery() {
                                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                                 src={img.src}
                                 alt={img.alt}
-                                className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+                                className="w-full h-full object-cover transition-opacity duration-500"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                             <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">

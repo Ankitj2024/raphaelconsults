@@ -13,7 +13,7 @@
   --rc-glass-bd:    rgba(255,255,255,0.10);
   --rc-muted:       rgba(255,255,255,0.40);
   --rc-subtle:      rgba(255,255,255,0.20);
-  --rc-stroke:      rgba(255,255,255,0.30);
+  --rc-stroke:      #ffffff;
   --rc-accent:      #ff4e00;
   --rc-accent-l:    #ff6a2a;
   --rc-accent-d:    #cc3e00;
@@ -31,7 +31,7 @@
   --rc-glass-bd:    rgba(0,0,0,0.10);
   --rc-muted:       rgba(0,0,0,0.45);
   --rc-subtle:      rgba(0,0,0,0.20);
-  --rc-stroke:      rgba(0,0,0,0.25);
+  --rc-stroke:      #000000;
 }
 
 /* ─── Tailwind theme ─── */
