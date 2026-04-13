@@ -25,7 +25,7 @@ export function Gallery() {
                 >
                     <span className="text-accent text-[10px] font-bold uppercase tracking-[0.3em] mb-4 block">Moments</span>
                     <h2 className="font-display text-5xl md:text-7xl font-bold uppercase leading-[0.9]" style={{ color: 'var(--rc-fg-hex)' }}>
-                        Our Global<br />Reach in <span className="text-stroke italic font-serif">Action</span>
+                        Our Global<br />Reach in <span className="text-stroke italic font-serif">History</span>
                     </h2>
                     <p className="mt-8 max-w-lg text-sm uppercase tracking-widest leading-loose" style={{ color: 'var(--rc-muted)' }}>
                         Real student success stories, airport arrivals, and strong university partnerships worldwide.

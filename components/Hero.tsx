@@ -1,7 +1,10 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'motion/react';
+import { World } from './ui/globe';
+import { useTheme } from '../context/ThemeContext';
 
 export function Hero() {
+    const { isDark, accentColor } = useTheme();
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -24,6 +27,43 @@ export function Hero() {
 
     const textX = useSpring(mouseX, { damping: 20, stiffness: 100 });
     const textY = useSpring(mouseY, { damping: 20, stiffness: 100 });
+
+    const globeConfig = {
+        pointSize: 12,
+        globeColor: "transparent",
+        showAtmosphere: true,
+        atmosphereColor: isDark ? "#ffffff" : "#0066FF",
+        atmosphereAltitude: 0.1,
+        emissive: isDark ? "#000000" : "#ffffff",
+        emissiveIntensity: 0.1,
+        shininess: 0.9,
+        polygonColor: isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.7)",
+        ambientLight: isDark ? "#ffffff" : "#000000",
+        directionalLeftLight: isDark ? "#ffffff" : "#000000",
+        directionalTopLight: isDark ? "#ffffff" : "#000000",
+        pointLight: isDark ? "#ffffff" : "#000000",
+        arcTime: 1000,
+        arcLength: 0.9,
+        rings: 1,
+        maxRings: 3,
+        initialPosition: { lat: 20, lng: 0 },
+        autoRotate: true,
+        autoRotateSpeed: 0.5,
+    };
+
+    const colors = accentColor === 'blue'
+        ? ["#0066FF", "#3385FF", "#ffffff"]
+        : ["#ff4e00", "#ff6a2a", "#ffffff"];
+    const sampleArcs = [
+        { order: 1, startLat: 51.5072, startLng: -0.1276, endLat: 28.6139, endLng: 77.209, arcAlt: 0.2, color: colors[0] },
+        { order: 1, startLat: -19.8856, startLng: -43.9512, endLat: 51.5072, endLng: -0.1276, arcAlt: 0.5, color: colors[1] },
+        { order: 2, startLat: 28.6139, startLng: 77.209, endLat: -33.8688, endLng: 151.2093, arcAlt: 0.3, color: colors[2] },
+        { order: 2, startLat: 1.3521, startLng: 103.8198, endLat: 48.8566, endLng: 2.3522, arcAlt: 0.2, color: colors[0] },
+        { order: 3, startLat: 34.0522, startLng: -118.2437, endLat: 51.5072, endLng: -0.1276, arcAlt: 0.3, color: colors[1] },
+        { order: 4, startLat: 40.7128, startLng: -74.006, endLat: -34.6037, endLng: -58.3816, arcAlt: 0.4, color: colors[2] },
+        { order: 5, startLat: 1.3521, startLng: 103.8198, endLat: 35.6762, endLng: 139.6503, arcAlt: 0.2, color: colors[0] },
+        { order: 6, startLat: -22.9068, startLng: -43.1729, endLat: 28.6139, endLng: 77.209, arcAlt: 0.7, color: colors[1] }
+    ];
 
     return (
         <section
@@ -86,14 +126,19 @@ export function Hero() {
                 </motion.div>
             </motion.div>
 
-            {/* Background Radial Glow */}
-            <div className="absolute inset-0 z-0">
+            {/* Background Globe Integration */}
+            <div className="absolute inset-0 z-0 opacity-80 overflow-hidden pointer-events-none">
+                <div className="absolute top-1/2 right-0 h-[200%] aspect-square -translate-y-1/2 translate-x-1/2">
+                    <World data={sampleArcs} globeConfig={globeConfig} />
+                </div>
+                {/* Fallback Glow */}
                 <motion.div
                     animate={{ scale: [1, 1.1, 1], rotate: [0, 5, 0] }}
                     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150vw] h-[150vw] bg-radial from-accent/15 via-transparent to-transparent opacity-50 blur-3xl"
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150vw] h-[150vw] bg-radial from-accent/10 via-transparent to-transparent opacity-30 blur-3xl pointer-events-none"
                 />
             </div>
-        </section>
-    );
-} 
+        </section>  
+    );  
+}
+

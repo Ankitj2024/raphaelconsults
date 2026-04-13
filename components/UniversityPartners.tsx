@@ -36,11 +36,10 @@ export function UniversityPartners() {
                         <button
                             key={dest.id}
                             onClick={() => setActiveTab(dest.id)}
-                            className={`flex items-center gap-2.5 px-6 py-3 rounded-full transition-all duration-300 shrink-0 text-sm font-bold uppercase tracking-wider ${
-                                activeTab === dest.id
+                            className={`flex items-center gap-2.5 px-6 py-3 rounded-full transition-all duration-300 shrink-0 text-sm font-bold uppercase tracking-wider ${activeTab === dest.id
                                     ? 'bg-accent text-white'
                                     : 'glass hover:border-accent'
-                            }`}
+                                }`}
                             style={activeTab !== dest.id ? { color: 'var(--rc-muted)' } : {}}
                         >
                             <img src={dest.image} alt={dest.country} className="w-5 h-3.5 object-cover rounded-[2px]" />

@@ -21,13 +21,20 @@ function MoonIcon() {
 
 export function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const { isDark, toggleTheme } = useTheme();
+    const { isDark, toggleTheme, toggleAccentColor } = useTheme();
 
     return (
         <nav className="fixed top-0 left-0 w-full p-6 md:p-8 flex justify-between items-center z-[5000] bg-bg/60 backdrop-blur-xl border-b border-white/5" style={{ borderBottomColor: 'var(--rc-border)' }}>
             {/* Logo */}
             <div className="font-display text-2xl font-bold uppercase tracking-tighter" style={{ color: 'var(--rc-fg-hex)' }}>
-                Raphael<span className="text-accent">.</span>
+                Raphael
+                <span 
+                    className="text-accent cursor-pointer inline-block hover:scale-150 transition-transform active:scale-95 px-0.5"
+                    onClick={toggleAccentColor}
+                    title="Change Brand Color"
+                >
+                    .
+                </span>
             </div>
 
             {/* Desktop Menu */}

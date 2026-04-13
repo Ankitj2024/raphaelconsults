@@ -52,7 +52,7 @@ export function DestinationsGrid() {
                     </div>
 
                     <div className="flex-shrink-0 w-[20vw] flex items-center justify-center">
-                        <div 
+                        <div
                             className="w-24 h-24 rounded-full border border-[var(--rc-border-color)] flex items-center justify-center group cursor-pointer hover:bg-accent hover:border-accent transition-colors duration-500"
                             onClick={() => {
                                 document.getElementById('universities')?.scrollIntoView({ behavior: 'smooth' });
