@@ -12,18 +12,15 @@ interface ThemeContextType {
 }
 
 const ThemeContext = createContext<ThemeContextType>({
-    theme: 'dark',
+    theme: 'light',
     toggleTheme: () => {},
-    isDark: true,
+    isDark: false,
     accentColor: 'blue',
     toggleAccentColor: () => {},
 });
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-    const [theme, setTheme] = useState<Theme>(() => {
-        const saved = localStorage.getItem('rc-theme');
-        return (saved as Theme) || 'dark';
-    });
+    const [theme, setTheme] = useState<Theme>('light');
 
     const [accentColor, setAccentColor] = useState<AccentColor>(() => {
         const saved = localStorage.getItem('rc-accent-color');
