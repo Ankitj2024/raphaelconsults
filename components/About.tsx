@@ -3,18 +3,18 @@ import { motion } from 'motion/react';
 
 export function About() {
     return (
-        <section id="about" className="py-32 px-4 relative overflow-hidden">
+        <section id="about" className="py-16 lg:py-20 px-4 relative overflow-hidden">
             <div className="max-w-7xl mx-auto">
                 <motion.div
-                    initial={{ opacity: 0, y: 80 }}
+                    initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                    viewport={{ once: true }}
-                    className="text-center mb-20"
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    className="text-center mb-16 md:mb-20"
                 >
-                    <span className="text-accent text-[10px] font-bold uppercase tracking-[0.3em] mb-4 block">Corporate Identity</span>
-                    <h2 className="font-display text-5xl md:text-8xl font-bold uppercase leading-[0.9] mb-8" style={{ color: 'var(--rc-fg-hex)' }}>
-                        About <span className="text-stroke italic font-serif">Us</span>
+                    <span className="text-accent text-[10px] font-bold tracking-[0.3em] mb-4 block">Corporate Identity</span>
+                    <h2 className="font-sans text-5xl md:text-8xl font-bold leading-[0.9] mb-8" style={{ color: 'var(--rc-fg-hex)' }}>
+                        About <span className="text-accent font-sans">Us</span>
                     </h2>
                     <p className="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: 'var(--rc-muted)' }}>
                         Raphael Travel &amp; Educational Consults is a premier international education consultancy operating globally across
@@ -24,11 +24,11 @@ export function About() {
                 </motion.div>
 
                 <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: "100%" }}
-                    transition={{ duration: 1, ease: "circOut" }}
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    transition={{ duration: 0.8, ease: "circOut" }}
                     viewport={{ once: true }}
-                    className="h-px mb-20"
+                    className="h-px mb-12 md:mb-20 origin-left"
                     style={{ backgroundColor: 'var(--rc-border)' }}
                 />
 
@@ -58,17 +58,17 @@ export function About() {
                     ].map((item, i) => (
                         <motion.div
                             key={item.title}
-                            initial={{ opacity: 0, y: 40 }}
+                            initial={{ opacity: 0, y: 25 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
-                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                            viewport={{ once: true, margin: "-50px" }}
                             className="group glass rounded-2xl p-8 transition-all duration-500 hover:-translate-y-2"
                             style={{ ['--hover-bg' as string]: 'var(--rc-glass-bg)' }}
                         >
                             <div className="w-14 h-14 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center mb-6 group-hover:bg-accent/20 group-hover:scale-110 transition-all duration-500">
                                 {item.icon}
                             </div>
-                            <h3 className="font-display text-xl font-bold uppercase mb-4 group-hover:text-accent transition-colors duration-300" style={{ color: 'var(--rc-fg-hex)' }}>{item.title}</h3>
+                            <h3 className="font-sans text-xl font-bold mb-4 group-hover:text-accent transition-colors duration-300" style={{ color: 'var(--rc-fg-hex)' }}>{item.title}</h3>
                             <p className="text-sm leading-relaxed" style={{ color: 'var(--rc-muted)' }}>{item.desc}</p>
                         </motion.div>
                     ))}

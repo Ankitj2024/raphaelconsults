@@ -10,7 +10,7 @@ import { Services } from './components/Services';
 import { LeadGenCTA } from './components/LeadGenCTA';
 import { Footer } from './components/Footer';
 import { Gallery } from './components/Gallery';
-import CustomCursor from './components/CustomCursor';
+import { ScrollVelocity } from './components/ScrollVelocity';
 import { motion, useScroll, useSpring } from 'motion/react';
 
 function AppContent() {
@@ -24,7 +24,6 @@ function AppContent() {
   return (
     <main className="relative min-h-screen bg-bg selection:bg-accent selection:text-white" style={{ color: 'var(--rc-fg-hex)', transition: 'background-color 0.4s ease' }}>
       {/* Global Elements */}
-      <CustomCursor />
       <div className="noise" />
 
       {/* Scroll Progress Bar */}
@@ -38,13 +37,20 @@ function AppContent() {
 
       {/* Content */}
       <Hero />
+      <div className="py-8 md:py-12 overflow-hidden bg-blue-600 border-none">
+        <ScrollVelocity
+          texts={['Study Abroad', 'Global Excellence']} 
+          velocity={40}
+          className="font-sans font-bold uppercase tracking-tight text-white mx-4"
+        />
+      </div>
+      <LeadGenCTA />
       <CompanyStats />
       <DestinationsGrid />
       <UniversityPartners />
       <Services />
       <Gallery />
       <About />
-      <LeadGenCTA />
       <Footer />
 
       {/* Page Load Transition */}

@@ -1,5 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import { motion } from 'motion/react';
+
+const Grainient = lazy(() => import('./Grainient'));
+
+// Extracted outside component to prevent recreation on every render
+const inputBaseStyle: React.CSSProperties = {
+    width: '100%',
+    backgroundColor: 'rgba(0,0,0,0.04)',
+    border: '1px solid rgba(0,0,0,0.10)',
+    borderRadius: '0.75rem',
+    padding: '0.875rem 1rem',
+    outline: 'none',
+    color: '#1a1a1a',
+    fontSize: '0.875rem',
+    transition: 'border-color 0.3s',
+};
+
+const labelStyle: React.CSSProperties = {
+    fontSize: '10px',
+    fontWeight: 700,
+    color: '#666',
+    letterSpacing: '0.2em',
+};
+
+function InputField(props: React.InputHTMLAttributes<HTMLInputElement>) {
+    return <input {...props} style={inputBaseStyle} />;
+}
+
+function SelectField({ children, ...props }: React.SelectHTMLAttributes<HTMLSelectElement>) {
+    return (
+        <select {...props} style={{ ...inputBaseStyle, appearance: 'none', cursor: 'pointer' }}>
+            {children}
+        </select>
+    );
+}
 
 export function LeadGenCTA() {
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -26,56 +60,35 @@ export function LeadGenCTA() {
         window.open(`https://wa.me/918427226647?text=${encodedText}`, '_blank');
     };
 
-    const inputStyle: React.CSSProperties = {
-        width: '100%',
-        backgroundColor: 'var(--rc-glass-bg)',
-        border: '1px solid var(--rc-glass-bd)',
-        borderRadius: '0.75rem',
-        padding: '0.875rem 1rem',
-        outline: 'none',
-        color: 'var(--rc-fg-hex)',
-        fontSize: '0.875rem',
-        transition: 'border-color 0.3s',
-    };
-
-    const labelStyle: React.CSSProperties = {
-        fontSize: '10px',
-        fontWeight: 700,
-        color: 'var(--rc-muted)',
-        textTransform: 'uppercase',
-        letterSpacing: '0.2em',
-    };
-
-    const InputField = ({ ...props }: React.InputHTMLAttributes<HTMLInputElement>) => (
-        <input {...props} style={inputStyle} />
-    );
-
-    const SelectField = ({ children, ...props }: React.SelectHTMLAttributes<HTMLSelectElement>) => (
-        <select {...props} style={{ ...inputStyle, appearance: 'none', cursor: 'pointer' }}>
-            {children}
-        </select>
-    );
-
     return (
-        <section id="contact-form" className="py-32 px-4 relative overflow-hidden">
-            {/* Background glow */}
-            <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-accent/5 rounded-full blur-[200px] pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-[30rem] h-[30rem] bg-blue-500/5 rounded-full blur-[200px] pointer-events-none" />
+        <section id="contact-form" className="py-16 lg:py-20 px-4 relative overflow-hidden">
+            <Suspense fallback={<div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-blue-50 to-white" />}>
+                <Grainient
+                    color1="#ffffff"
+                    color2="#93c5fd"
+                    color3="#3b82f6"
+                    timeSpeed={0.15}
+                    blendSoftness={0.2}
+                    grainAmount={0.06}
+                    warpSpeed={1.5}
+                    contrast={1.1}
+                />
+            </Suspense>
 
-            <div className="max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div className="max-w-7xl mx-auto relative z-10">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                     {/* Left Column */}
                     <motion.div
-                        initial={{ opacity: 0, y: 80 }}
+                        initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        viewport={{ once: true, margin: "-100px" }}
                     >
-                        <span className="text-accent text-[10px] font-bold uppercase tracking-[0.3em] mb-4 block">Get Started</span>
-                        <h2 className="font-display text-5xl md:text-7xl font-bold uppercase leading-[0.9] mb-8" style={{ color: 'var(--rc-fg-hex)' }}>
-                            Ready to<br />Study <span className="text-stroke italic font-serif">Abroad?</span>
+                        <span className="text-accent text-[10px] font-bold tracking-[0.3em] mb-4 block">Get Started</span>
+                        <h2 className="font-sans text-4xl md:text-5xl lg:text-7xl font-bold leading-[0.9] mb-8" style={{ color: 'var(--rc-fg-hex)' }}>
+                            Ready to<br />Study <span className="text-accent font-sans">Abroad?</span>
                         </h2>
-                        <p className="max-w-md text-sm uppercase tracking-widest leading-loose mb-12" style={{ color: 'var(--rc-muted)' }}>
+                        <p className="max-w-md text-sm tracking-widest leading-loose mb-12" style={{ color: 'var(--rc-muted)' }}>
                             Fill out the form to get a free personalized consultation from our expert counselors.
                             We'll guide you to the best universities worldwide.
                         </p>
@@ -89,7 +102,7 @@ export function LeadGenCTA() {
                             ].map((item, i) => (
                                 <div key={i} className="flex items-center gap-3 group">
                                     <div className="w-2 h-2 bg-accent rounded-full group-hover:scale-150 transition-transform duration-300" />
-                                    <span className="text-sm uppercase tracking-wider group-hover:text-accent transition-colors duration-300" style={{ color: 'var(--rc-muted)' }}>{item}</span>
+                                    <span className="text-sm tracking-wider group-hover:text-accent transition-colors duration-300" style={{ color: 'var(--rc-muted)' }}>{item}</span>
                                 </div>
                             ))}
                         </div>
@@ -97,11 +110,11 @@ export function LeadGenCTA() {
 
                     {/* Right Column: Form */}
                     <motion.div
-                        initial={{ opacity: 0, y: 60 }}
+                        initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                        viewport={{ once: true }}
-                        className="glass-strong rounded-3xl p-8 md:p-12 relative overflow-hidden"
+                        viewport={{ once: true, margin: "-100px" }}
+                        className="bg-white shadow-2xl rounded-3xl p-6 md:p-10 lg:p-12 relative overflow-hidden"
                     >
                         <div className="absolute top-0 right-0 w-[50%] h-[50%] bg-accent/5 rounded-full blur-[100px] pointer-events-none" />
 
@@ -112,11 +125,11 @@ export function LeadGenCTA() {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
                                     </svg>
                                 </div>
-                                <h3 className="font-display text-3xl font-bold uppercase mb-4" style={{ color: 'var(--rc-fg-hex)' }}>Thank You!</h3>
-                                <p className="mb-8 max-w-xs mx-auto" style={{ color: 'var(--rc-muted)' }}>We've received your enquiry. One of our expert counselors will contact you within 24 hours.</p>
+                                <h3 className="font-sans text-3xl font-bold mb-4 text-gray-900">Thank You!</h3>
+                                <p className="mb-8 max-w-xs mx-auto text-gray-500">We've received your enquiry. One of our expert counselors will contact you within 24 hours.</p>
                                 <button
                                     onClick={() => { setIsSubmitted(false); setStep(1); setFormData({ name: '', phone: '', email: '', city: '', qualification: 'Bachelors Degree', passingYear: '', grade: '', destination: 'United Kingdom & Ireland', studyLevel: 'Masters / Postgrad', intake: 'Sept 2025', budget: '', message: '' }); }}
-                                    className="text-accent font-bold hover:text-accent-light transition-colors uppercase tracking-widest text-xs"
+                                    className="text-accent font-bold hover:text-accent-light transition-colors tracking-widest text-xs"
                                 >
                                     Send Another Enquiry
                                 </button>
@@ -124,16 +137,16 @@ export function LeadGenCTA() {
                         ) : (
                             <form className="space-y-5 relative z-10" onSubmit={handleSubmit}>
                                 {/* Progress */}
-                                <div className="w-full h-1 rounded-full mb-6 overflow-hidden" style={{ backgroundColor: 'var(--rc-glass-bg)' }}>
+                                <div className="w-full h-1 rounded-full mb-6 overflow-hidden bg-gray-100">
                                     <div className="bg-accent h-full rounded-full transition-all duration-700 ease-out" style={{ width: `${(step / 3) * 100}%` }} />
                                 </div>
                                 <div className="flex justify-between items-center mb-6">
-                                    <h3 className="font-display text-xl font-bold uppercase" style={{ color: 'var(--rc-fg-hex)' }}>
+                                    <h3 className="font-sans text-xl font-bold text-gray-900">
                                         {step === 1 && "Start Your Journey"}
                                         {step === 2 && "Academic Profile"}
                                         {step === 3 && "Study Preferences"}
                                     </h3>
-                                    <span className="text-[10px] font-bold text-accent bg-accent/10 px-4 py-1.5 rounded-full border border-accent/20 uppercase tracking-widest">Step {step}/3</span>
+                                    <span className="text-[10px] font-bold text-accent bg-accent/10 px-4 py-1.5 rounded-full border border-accent/20 tracking-widest">Step {step}/3</span>
                                 </div>
 
                                 {step === 1 && (
@@ -168,28 +181,28 @@ export function LeadGenCTA() {
                                             <div className="space-y-1.5"><label style={labelStyle}>Budget</label><InputField name="budget" value={formData.budget} onChange={handleChange} type="text" placeholder="e.g. 15-20 Lakhs" /></div>
                                         </div>
                                         <div className="space-y-1.5"><label style={labelStyle}>Message (Optional)</label>
-                                            <textarea name="message" value={formData.message} onChange={handleChange} rows={2} placeholder="Any specific questions?" style={{ ...inputStyle, resize: 'none' }} />
+                                            <textarea name="message" value={formData.message} onChange={handleChange} rows={2} placeholder="Any specific questions?" style={{ ...inputBaseStyle, resize: 'none' }} />
                                         </div>
                                     </div>
                                 )}
 
                                 <div className="flex gap-3 pt-4">
                                     {step > 1 && (
-                                        <button type="button" onClick={handleBack} className="w-1/3 glass font-display font-bold py-3.5 rounded-xl hover:border-accent transition-all duration-300 text-sm uppercase tracking-wider" style={{ color: 'var(--rc-fg-hex)' }}>
+                                        <button type="button" onClick={handleBack} className="w-1/3 font-sans font-bold py-3.5 rounded-xl border border-gray-200 hover:border-accent transition-all duration-300 text-sm tracking-wider text-gray-700">
                                             Back
                                         </button>
                                     )}
                                     {step < 3 ? (
-                                        <button type="button" onClick={handleNext} className="flex-1 bg-accent hover:bg-accent-light text-white font-display font-bold py-3.5 rounded-xl transition-all duration-300 transform hover:-translate-y-0.5 text-sm uppercase tracking-wider">
+                                        <button type="button" onClick={handleNext} className="flex-1 bg-accent hover:bg-accent-light text-white font-sans font-bold py-3.5 rounded-xl transition-all duration-300 transform hover:-translate-y-0.5 text-sm tracking-wider">
                                             Next Step →
                                         </button>
                                     ) : (
-                                        <button type="submit" className="flex-1 bg-accent hover:bg-accent-light text-white font-display font-bold py-3.5 rounded-xl transition-all duration-300 transform hover:-translate-y-0.5 text-sm uppercase tracking-wider">
+                                        <button type="submit" className="flex-1 bg-accent hover:bg-accent-light text-white font-sans font-bold py-3.5 rounded-xl transition-all duration-300 transform hover:-translate-y-0.5 text-sm tracking-wider">
                                             Submit Application
                                         </button>
                                     )}
                                 </div>
-                                <p className="text-center text-[10px] mt-4 uppercase tracking-[0.2em]" style={{ color: 'var(--rc-subtle)' }}>Step {step} of 3 • Secure &amp; Confidential</p>
+                                <p className="text-center text-[10px] mt-4 tracking-[0.2em] text-gray-400">Step {step} of 3 • Secure &amp; Confidential</p>
                             </form>
                         )}
                     </motion.div>

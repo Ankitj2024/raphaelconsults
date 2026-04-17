@@ -24,9 +24,10 @@ export function Navbar() {
     const { isDark, toggleTheme, toggleAccentColor } = useTheme();
 
     return (
-        <nav className="fixed top-0 left-0 w-full p-6 md:p-8 flex justify-between items-center z-[5000] bg-bg/60 backdrop-blur-xl border-b border-white/5" style={{ borderBottomColor: 'var(--rc-border)' }}>
+        <header className="fixed top-6 left-0 right-0 z-[5000] pointer-events-none flex justify-center">
+            <nav className="w-[95%] max-w-7xl px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center bg-bg/60 backdrop-blur-xl border rounded-full shadow-2xl pointer-events-auto" style={{ borderColor: 'var(--rc-border)' }}>
             {/* Logo */}
-            <div className="font-display text-2xl font-bold uppercase tracking-tighter" style={{ color: 'var(--rc-fg-hex)' }}>
+            <div className="font-sans text-2xl font-bold tracking-tighter" style={{ color: 'var(--rc-fg-hex)' }}>
                 Raphael
                 <span 
                     className="text-accent cursor-pointer inline-block hover:scale-150 transition-transform active:scale-95 px-0.5"
@@ -49,7 +50,7 @@ export function Navbar() {
                     <a
                         key={item.name}
                         href={`#${item.id}`}
-                        className="text-[10px] uppercase tracking-[0.3em] font-bold transition-colors duration-300 hover:text-accent"
+                        className="text-[10px] tracking-[0.3em] font-bold transition-colors duration-300 hover:text-accent"
                         style={{ color: 'var(--rc-muted)' }}
                     >
                         {item.name}
@@ -80,7 +81,7 @@ export function Navbar() {
                     href="https://wa.me/918427226647?text=Hello%2C%20I%20would%20like%20to%20book%20a%20free%20consultation%20for%20studying%20abroad"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[10px] uppercase tracking-[0.3em] font-bold text-white bg-accent px-6 py-3 rounded-full hover:bg-accent-light transition-colors duration-300"
+                    className="text-[10px] tracking-[0.3em] font-bold text-white bg-accent px-6 py-3 rounded-full hover:bg-accent-light transition-colors duration-300"
                 >
                     Book Consultation
                 </a>
@@ -123,9 +124,10 @@ export function Navbar() {
                     </div>
                 </div>
             </div>
+        </nav>
 
-            {/* Mobile Menu Dropdown */}
-            <div className={`md:hidden fixed inset-0 top-20 backdrop-blur-2xl z-[4999] flex flex-col items-center justify-center gap-8 transition-all duration-500 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+        {/* Mobile Menu Dropdown */}
+            <div className={`md:hidden fixed inset-0 top-0 pt-28 backdrop-blur-2xl z-[4999] flex flex-col items-center justify-center gap-8 transition-all duration-500 pointer-events-auto ${isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
                 style={{ backgroundColor: 'color-mix(in srgb, var(--rc-bg) 95%, transparent)' }}
             >
                 {[
@@ -138,17 +140,17 @@ export function Navbar() {
                     <a
                         key={item.name}
                         href={`#${item.id}`}
-                        className="font-display text-3xl font-bold uppercase tracking-tight hover:text-accent transition-colors duration-300"
+                        className="font-sans text-3xl font-bold tracking-tight hover:text-accent transition-colors duration-300"
                         style={{ color: 'var(--rc-muted)' }}
                         onClick={() => setIsMenuOpen(false)}
                     >
                         {item.name}
                     </a>
                 ))}
-                <a href="https://wa.me/918427226647?text=Hello%2C%20I%20would%20like%20to%20book%20a%20free%20consultation%20for%20studying%20abroad" target="_blank" rel="noopener noreferrer" className="mt-4 bg-accent text-white px-8 py-4 rounded-full font-display font-bold uppercase tracking-widest text-sm">
+                <a href="https://wa.me/918427226647?text=Hello%2C%20I%20would%20like%20to%20book%20a%20free%20consultation%20for%20studying%20abroad" target="_blank" rel="noopener noreferrer" className="mt-4 bg-accent text-white px-8 py-4 rounded-full font-sans font-bold tracking-widest text-sm">
                     Book Consultation
                 </a>
             </div>
-        </nav>
+        </header>
     );
 }
