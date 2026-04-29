@@ -2,7 +2,6 @@ import React from 'react';
 import { ThemeProvider } from './context/ThemeContext';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
-import { CompanyStats } from './components/CompanyStats';
 import { About } from './components/About';
 import { DestinationsGrid } from './components/DestinationsGrid';
 import { UniversityPartners } from './components/UniversityPartners';
@@ -10,6 +9,7 @@ import { Services } from './components/Services';
 import { LeadGenCTA } from './components/LeadGenCTA';
 import { Footer } from './components/Footer';
 import { Gallery } from './components/Gallery';
+import { Process } from './components/Process';
 import { ScrollVelocity } from './components/ScrollVelocity';
 import { motion, useScroll, useSpring } from 'motion/react';
 
@@ -45,9 +45,9 @@ function AppContent() {
         />
       </div>
       <LeadGenCTA />
-      <CompanyStats />
       <DestinationsGrid />
       <UniversityPartners />
+      <Process />
       <Services />
       <Gallery />
       <About />

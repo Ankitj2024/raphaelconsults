@@ -1,58 +1,83 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'motion/react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export function Gallery() {
-    const images = [
-        { src: "/images/students_campus_1775913252217.png", alt: "International Students", span: "md:col-span-2 md:row-span-2" },
-        { src: "/images/award-parul.jpg", alt: "Parul Award", span: "" },
-        { src: "/images/consultancy_partnership_1775913288670.png", alt: "Consultancy Partnership", span: "" },
-        { src: "/images/graduation_celebration_1775913271414.png", alt: "Graduation Celebration", span: "md:col-span-2" },
-        { src: "/images/student-group.jpg", alt: "Student Group", span: "md:col-span-2 md:row-span-2" },
-        { src: "/images/student_airport_1775913307857.png", alt: "Student at Airport", span: "md:row-span-2" },
-        { src: "/images/airport-arrival.jpg", alt: "Airport Walk", span: "" },
-        { src: "/images/award-certificate.jpg", alt: "Certificate Event", span: "" }
-    ];
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+    const images = Array.from({ length: 7 }, (_, i) => ({
+        src: `/images/gallery/image${i + 1}.jpeg`,
+        alt: `Gallery Image ${i + 1}`
+    }));
+
+    const scroll = (direction: 'left' | 'right') => {
+        if (scrollContainerRef.current) {
+            const { current } = scrollContainerRef;
+            const scrollAmount = current.clientWidth * 0.8;
+            const targetScroll = current.scrollLeft + (direction === 'left' ? -scrollAmount : scrollAmount);
+            current.scrollTo({
+                left: targetScroll,
+                behavior: 'smooth'
+            });
+        }
+    };
 
     return (
-        <section className="py-16 lg:py-20 px-4 relative overflow-hidden">
+        <section className="py-16 lg:py-24 px-4 relative overflow-hidden bg-bg">
             <div className="max-w-7xl mx-auto">
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    className="mb-12 md:mb-20"
-                >
-                    <span className="text-accent text-[10px] font-bold tracking-[0.3em] mb-4 block">Moments</span>
-                    <h2 className="font-sans text-4xl md:text-5xl lg:text-7xl font-bold leading-[0.9]" style={{ color: 'var(--rc-fg-hex)' }}>
-                        Our Global<br />Reach in <span className="text-accent font-sans">History</span>
-                    </h2>
-                    <p className="mt-6 md:mt-8 max-w-lg text-sm tracking-widest leading-loose" style={{ color: 'var(--rc-muted)' }}>
-                        Real student success stories, airport arrivals, and strong university partnerships worldwide.
-                    </p>
-                </motion.div>
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16 gap-6">
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        viewport={{ once: true }}
+                    >
+                        <span className="text-accent text-[10px] font-bold tracking-[0.3em] mb-4 block uppercase">Moments</span>
+                        <h2 className="font-sans text-4xl md:text-5xl lg:text-7xl font-bold leading-[0.9]" style={{ color: 'var(--rc-fg-hex)' }}>
+                            Our Global<br />Reach in <span className="text-accent font-sans italic">History</span>
+                        </h2>
+                    </motion.div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 auto-rows-[180px] sm:auto-rows-[200px] md:auto-rows-[220px]">
+                    <div className="flex items-center gap-3">
+                        <button
+                            onClick={() => scroll('left')}
+                            className="p-4 rounded-full glass border border-white/10 hover:bg-accent hover:text-white transition-all duration-300 group"
+                            aria-label="Scroll Left"
+                        >
+                            <ChevronLeft className="w-6 h-6 group-active:scale-90 transition-transform" />
+                        </button>
+                        <button
+                            onClick={() => scroll('right')}
+                            className="p-4 rounded-full glass border border-white/10 hover:bg-accent hover:text-white transition-all duration-300 group"
+                            aria-label="Scroll Right"
+                        >
+                            <ChevronRight className="w-6 h-6 group-active:scale-90 transition-transform" />
+                        </button>
+                    </div>
+                </div>
+
+                <div
+                    ref={scrollContainerRef}
+                    className="flex gap-6 overflow-x-auto hide-scrollbar snap-x snap-mandatory pb-8 -mx-4 px-4 md:mx-0 md:px-0"
+                    style={{ scrollBehavior: 'smooth' }}
+                >
                     {images.map((img, i) => (
                         <motion.div
                             key={i}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                            viewport={{ once: true, margin: "-50px" }}
-                            className={`relative overflow-hidden glass rounded-2xl group cursor-pointer ${img.span}`}
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                            viewport={{ once: true }}
+                            className="relative min-w-[300px] md:min-w-[450px] aspect-[4/5] md:aspect-[16/10] overflow-hidden glass rounded-3xl group cursor-pointer snap-start"
                         >
                             <img
                                 src={img.src}
                                 alt={img.alt}
                                 loading="lazy"
                                 decoding="async"
-                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                            <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
-                                <span className="text-accent text-xs font-bold tracking-widest">{img.alt}</span>
-                            </div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         </motion.div>
                     ))}
                 </div>
